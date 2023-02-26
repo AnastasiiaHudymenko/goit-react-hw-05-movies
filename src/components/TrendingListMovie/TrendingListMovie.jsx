@@ -1,15 +1,16 @@
-// import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-// export const TrendingListMovie = ({ movies, onClick }) => {
-//   return (
-//     <ul>
-//       {movies.map(({ title, id }) => (
-//         <li key={id}>
-//           <Link to={id} onClick={() => onClick(id)}>
-//             <p>{title}</p>
-//           </Link>
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// };
+export const TrendingListMovie = ({ movies }) => {
+  const location = useLocation();
+  return (
+    <ul>
+      {movies.map(({ title, id }) => (
+        <li key={id}>
+          <Link to={`/movies/${id}`} state={{ from: location }}>
+            <p>{title}</p>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+};

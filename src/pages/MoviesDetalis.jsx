@@ -1,12 +1,70 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { MutatingDots } from 'react-loader-spinner';
+import MovieServices from '../services/MovieServices.js';
 
-export const MoviesDetalis = ({ movieId }) => {
-  const { id } = useParams();
-  console.log(movieId);
+export const MoviesDetalis = props => {
+  const { movieId } = useParams();
+  const [movieDetalis, setMovieDetalis] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const movieServices = new MovieServices();
+
+  useEffect(() => {
+    onRequest(movieId);
+    // eslint-disable-next-line
+  }, []);
+
+  const onRequest = async id => {
+    try {
+      const res = await movieServices.getMovieDetalis(id);
+      setMovieDetalis(res);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const { title, image, overview, genres, userScore } = movieDetalis;
 
   return (
-    <div>
-      <p>Hello MovieDetalis {id}</p>
-    </div>
+    <>
+      {loading ? (
+        <MutatingDots
+          height="100"
+          width="100"
+          ariaLabel="mutating-dots-loading"
+          wrapperStyle={{ display: 'flex', justifyContent: 'center' }}
+          visible={true}
+        />
+      ) : (
+        <div>
+          <Link to="/" state={{ from: location }}>
+            Go back{' '}
+          </Link>
+
+          {image && <img src={image} alt={title} />}
+
+          <h1>{title}</h1>
+          <h2>User score:</h2>
+          <p>{userScore}</p>
+          <h2>Overview</h2>
+          <p>{overview}</p>
+          <h2>Genres</h2>
+          <ul>
+            {genres && genres.map(({ name, id }) => <li key={id}>{name}</li>)}
+          </ul>
+          <ul>
+            <li>
+              <Link to="cast">Read about our cast</Link>
+            </li>
+            <li>
+              <Link to="reviews">Get to know the reviews</Link>
+            </li>
+          </ul>
+          <Outlet />
+        </div>
+      )}
+    </>
   );
 };

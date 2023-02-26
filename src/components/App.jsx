@@ -1,14 +1,10 @@
-import { useState } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { Home } from '../pages/Home';
 import { Movies } from '../pages/Movies';
-// import { MoviesDetalis } from '../pages/MoviesDetalis';
+import { MoviesDetalis } from '../pages/MoviesDetalis';
+import { CastMovie } from './CastMovie/CastMovie';
+import { ReviewsMovie } from './ReviewsMovie/ReviewsMovie';
 export const App = () => {
-  const [selectMovie, setSelectMovie] = useState(null);
-  console.log(selectMovie);
-  const onClick = id => {
-    setSelectMovie(id);
-  };
   return (
     <div>
       <header>
@@ -20,12 +16,12 @@ export const App = () => {
         </nav>
       </header>
       <Routes>
-        <Route path="/" element={<Home onClick={onClick} />} />
+        <Route path="/" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
-        {/* <Route
-          path="/movies/:id"
-          element={<MoviesDetalis movieId={selectMovie} />}
-        /> */}
+        <Route path="/movies/:movieId" element={<MoviesDetalis />}>
+          <Route path="/movies/:movieId/cast" element={<CastMovie />} />
+          <Route path="/movies/:movieId/reviews" element={<ReviewsMovie />} />
+        </Route>
       </Routes>
     </div>
   );
