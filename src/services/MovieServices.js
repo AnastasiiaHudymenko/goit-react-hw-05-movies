@@ -21,7 +21,6 @@ class MovieServices {
       const res = await axios.get(
         `${this.BASE_URL}movie/${id}?api_key=${this.API_KEY}&language=en-US`
       );
-      console.log(res);
       return this._transformMovieDetalis(res.data);
     } catch (error) {
       console.log(error);

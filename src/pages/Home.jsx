@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import MovieServices from '../services/MovieServices';
 import { TrendingListMovie } from '../components/TrendingListMovie/TrendingListMovie';
 
-export const Home = ({ onClick }) => {
+export const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const movieServices = new MovieServices();
 
@@ -23,7 +23,7 @@ export const Home = ({ onClick }) => {
   return (
     <main>
       <h1>Trending today</h1>
-      <TrendingListMovie onClick={onClick} movies={trendingMovies} />
+      <TrendingListMovie movies={trendingMovies} />
     </main>
   );
 };

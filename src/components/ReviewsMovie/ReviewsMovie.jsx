@@ -1,10 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import MovieServices from '../../services/MovieServices.js';
 export const ReviewsMovie = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
+
   const movieServices = new MovieServices();
+  const location = useLocation();
+  console.log(location);
 
   useEffect(() => {
     onRequest(movieId);

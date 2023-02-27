@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import { MutatingDots } from 'react-loader-spinner';
 import MovieServices from '../services/MovieServices.js';
 
-export const MoviesDetalis = props => {
+export const MoviesDetalis = () => {
   const { movieId } = useParams();
   const [movieDetalis, setMovieDetalis] = useState([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const movieServices = new MovieServices();
-
+  // const backHref = location.state?.from ?? '/movies';
   useEffect(() => {
     onRequest(movieId);
     // eslint-disable-next-line
@@ -39,7 +39,7 @@ export const MoviesDetalis = props => {
         />
       ) : (
         <div>
-          <Link to="/" state={{ from: location }}>
+          <Link to={location.state.from} state={{ from: location }}>
             Go back{' '}
           </Link>
 
@@ -56,10 +56,24 @@ export const MoviesDetalis = props => {
           </ul>
           <ul>
             <li>
-              <Link to="cast">Read about our cast</Link>
+              <Link
+                to="cast"
+                state={{
+                  from: `${location.state.from.pathname}${location.state.from.search}`,
+                }}
+              >
+                Read about our cast
+              </Link>
             </li>
             <li>
-              <Link to="reviews">Get to know the reviews</Link>
+              <Link
+                to="reviews"
+                state={{
+                  from: `${location.state.from.pathname}${location.state.from.search}`,
+                }}
+              >
+                Get to know the reviews
+              </Link>
             </li>
           </ul>
           <Outlet />

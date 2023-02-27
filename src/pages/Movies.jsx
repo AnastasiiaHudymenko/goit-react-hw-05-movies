@@ -1,32 +1,32 @@
 import { Formik, Form, Field } from 'formik';
-import { Link, useSearchParams, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useSearchParams, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import MovieServices from '../services/MovieServices';
+import { MovieList } from '../components/MovieList/MovieList';
 
 export const Movies = () => {
   const [query, setQuery] = useState(null);
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(() => {
+    return JSON.parse(sessionStorage.getItem('search')) ?? [];
+  });
   const movieServices = new MovieServices();
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
-  console.log(location);
-
-  useEffect(() => {
-    onRequest(query);
-    // eslint-disable-next-line
-  }, [query]);
+  console.log(query, searchParams);
 
   const onRequest = async query => {
     if (query === '') return;
     const res = await movieServices.getMovieSearch(query);
     setMovies(res);
+    sessionStorage.setItem('search', JSON.stringify(res));
   };
 
   const handlSubmit = ({ search }, action) => {
     setQuery(search);
+    onRequest(search);
+
     const nextParams = search !== '' ? { search } : {};
     setSearchParams(nextParams);
-    searchParams.get('name');
 
     action.resetForm();
   };
@@ -41,18 +41,10 @@ export const Movies = () => {
           <button type="submit">Search</button>
         </Form>
       </Formik>
-      {query && (
-        <ul>
-          {movies.map(({ id, title }) => {
-            return (
-              <li key={id}>
-                <Link to={`/movies/${id}`}>
-                  <p>{title}</p>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+      {location.search !== '' ? (
+        <MovieList movies={movies} />
+      ) : (
+        <MovieList movies={[]} />
       )}
     </main>
   );
