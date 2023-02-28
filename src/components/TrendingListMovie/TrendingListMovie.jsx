@@ -1,17 +1,22 @@
 import { Link, useLocation } from 'react-router-dom';
+import { MoviesList } from './TrendingList.styled';
+import { MovieTitle, ImgMovie, Item } from './TrendingList.styled';
 
-export const TrendingListMovie = ({ movies }) => {
+const TrendingListMovie = ({ movies }) => {
   const location = useLocation();
 
   return (
-    <ul>
-      {movies.map(({ title, id }) => (
-        <li key={id}>
+    <MoviesList>
+      {movies.map(({ title, id, images }) => (
+        <Item key={id}>
           <Link to={`/movies/${id}`} state={{ from: location }}>
-            <p>{title}</p>
+            <ImgMovie width={300} src={images} alt={title} />
+            <MovieTitle>{title}</MovieTitle>
           </Link>
-        </li>
+        </Item>
       ))}
-    </ul>
+    </MoviesList>
   );
 };
+
+export default TrendingListMovie;

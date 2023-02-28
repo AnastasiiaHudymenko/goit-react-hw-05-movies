@@ -1,16 +1,17 @@
 import { Formik, Form, Field } from 'formik';
 import { useSearchParams } from 'react-router-dom';
 
-import { MovieList } from '../components/MovieList/MovieList';
+import MovieList from '../components/MovieList/MovieList';
 
-export const Movies = () => {
+const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('search');
 
   const handlSubmit = ({ search }, action) => {
     const nextParams = search !== '' ? { search } : {};
-    setSearchParams(nextParams);
 
+    setSearchParams(nextParams);
+    console.log(search);
     action.resetForm();
   };
 
@@ -28,3 +29,5 @@ export const Movies = () => {
     </main>
   );
 };
+
+export default Movies;

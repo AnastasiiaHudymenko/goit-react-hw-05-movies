@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import MovieServices from '../../services/MovieServices';
 
-export const MovieList = ({ query }) => {
+const MovieList = ({ query }) => {
   const [movies, setMovies] = useState([]);
   const location = useLocation();
   const movieServices = new MovieServices();
@@ -31,3 +31,5 @@ export const MovieList = ({ query }) => {
     </ul>
   );
 };
+
+export default MovieList;

@@ -10,10 +10,20 @@ class MovieServices {
       const res = await axios.get(
         `${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}`
       );
-      return res.data.results;
+      return this._transformTrendingMovies(res.data.results);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  _transformTrendingMovies = movies => {
+    return movies.map(({ id, title, poster_path }) => {
+      return {
+        id,
+        title,
+        images: `${this.BASE_URL_IMG}${poster_path}`,
+      };
+    });
   };
 
   getMovieDetalis = async id => {
