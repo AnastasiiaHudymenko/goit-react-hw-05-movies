@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <main>
-      <h1>Trending today</h1>
+      <h1 style={{ marginBottom: '20px' }}>Trending today</h1>
       <TrendingListMovie movies={trendingMovies} />
     </main>
   );

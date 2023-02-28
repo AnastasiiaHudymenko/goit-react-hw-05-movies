@@ -2,6 +2,15 @@ import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState, Suspense } from 'react';
 import { MutatingDots } from 'react-loader-spinner';
 import MovieServices from '../services/MovieServices.js';
+import {
+  WrapperContent,
+  Content,
+  GenresList,
+  BtnGoBack,
+  ListCastReviews,
+  Item,
+  StyledLink,
+} from './MovieDetalis.styled';
 
 const MoviesDetalis = () => {
   const { movieId } = useParams();
@@ -28,33 +37,37 @@ const MoviesDetalis = () => {
   return (
     <>
       <div>
-        <Link to={location.state.from} state={{ from: location }}>
-          Go back{' '}
-        </Link>
+        <WrapperContent>
+          {image && <img width={250} src={image} alt={title} />}
+          <Content>
+            <h1>{title}</h1>
+            <p>User score: {userScore}</p>
+            <h2>Overview</h2>
+            <p>{overview}</p>
+            <h2>Genres: </h2>
+            <GenresList>
+              {genres && genres.map(({ name, id }) => <li key={id}>{name}</li>)}
+            </GenresList>
+          </Content>
+        </WrapperContent>
+        <BtnGoBack>
+          <Link to={location.state.from} state={{ from: location }}>
+            Go back{' '}
+          </Link>
+        </BtnGoBack>
 
-        {image && <img src={image} alt={title} />}
-
-        <h1>{title}</h1>
-        <h2>User score:</h2>
-        <p>{userScore}</p>
-        <h2>Overview</h2>
-        <p>{overview}</p>
-        <h2>Genres</h2>
-        <ul>
-          {genres && genres.map(({ name, id }) => <li key={id}>{name}</li>)}
-        </ul>
-        <ul>
-          <li>
-            <Link to="cast" state={location.state}>
+        <ListCastReviews>
+          <Item>
+            <StyledLink to="cast" state={location.state}>
               Read about our cast
-            </Link>
-          </li>
-          <li>
-            <Link to="reviews" state={location.state}>
+            </StyledLink>
+          </Item>
+          <Item>
+            <StyledLink to="reviews" state={location.state}>
               Get to know the reviews
-            </Link>
-          </li>
-        </ul>
+            </StyledLink>
+          </Item>
+        </ListCastReviews>
         <Suspense
           fallback={
             <div>

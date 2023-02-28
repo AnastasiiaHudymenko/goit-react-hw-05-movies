@@ -1,6 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import MovieServices from '../../services/MovieServices.js';
+import {
+  CastList,
+  CastItem,
+  WrapperContent,
+  ImgCast,
+} from './CastMovie.styled';
+import notFound from '../../not-found.jpg';
+console.log(notFound);
 const CastMovie = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
@@ -23,18 +31,28 @@ const CastMovie = () => {
 
   return (
     <div>
-      <ul>
+      <CastList>
         {cast.map(({ image, name, character, id }) => {
           return (
-            <li key={id}>
-              {image && <img src={image} alt="" width={100} />}
-
-              <h2>{name}</h2>
-              <p>{character}</p>
-            </li>
+            <CastItem key={id}>
+              {image ? (
+                <ImgCast width={150} src={image} alt="" />
+              ) : (
+                <ImgCast
+                  style={{ objectFit: 'cover', height: '221px' }}
+                  width={150}
+                  src={notFound}
+                  alt=""
+                />
+              )}
+              <WrapperContent>
+                <p>{name}</p>
+                <p>{character}</p>
+              </WrapperContent>
+            </CastItem>
           );
         })}
-      </ul>
+      </CastList>
     </div>
   );
 };

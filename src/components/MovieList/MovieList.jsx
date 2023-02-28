@@ -1,6 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import MovieServices from '../../services/MovieServices';
+import {
+  MoviesList,
+  MovieTitle,
+  ImgMovie,
+  Item,
+} from '../TrendingListMovie/TrendingList.styled';
+import notFoundImg from '../../not-found.jpg';
 
 const MovieList = ({ query }) => {
   const [movies, setMovies] = useState([]);
@@ -18,17 +25,27 @@ const MovieList = ({ query }) => {
     // eslint-disable-next-line
   }, [query, location.state]);
   return (
-    <ul>
-      {movies.map(({ id, title }) => {
+    <MoviesList>
+      {movies.map(({ id, title, image }) => {
         return (
-          <li key={id}>
+          <Item key={id}>
             <Link to={`/movies/${id}`} state={{ from: location }}>
-              <p>{title}</p>
+              {image ? (
+                <ImgMovie width={300} src={image} alt="" />
+              ) : (
+                <ImgMovie
+                  style={{ objectFit: 'cover', height: '450px' }}
+                  src={notFoundImg}
+                  alt=""
+                />
+              )}
+
+              <MovieTitle>{title}</MovieTitle>
             </Link>
-          </li>
+          </Item>
         );
       })}
-    </ul>
+    </MoviesList>
   );
 };
 

@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import MovieServices from '../../services/MovieServices.js';
+import { ReviewsList, AuthorTitle, ReviewsItem } from './ReviewsMovie.styled';
 
 const ReviewsMovie = () => {
   const { movieId } = useParams();
@@ -26,19 +27,22 @@ const ReviewsMovie = () => {
     <>
       {reviews ? (
         <div>
-          <ul>
+          <ReviewsList>
             {reviews.map(({ author, content, id }) => {
               return (
-                <li key={id}>
-                  <h2>Author:{author}</h2>
-                  <p>Content:{content}</p>
-                </li>
+                <ReviewsItem key={id}>
+                  <AuthorTitle>Author: {author}</AuthorTitle>
+                  <p>
+                    {' '}
+                    <b>Content:</b> {content}
+                  </p>
+                </ReviewsItem>
               );
             })}
-          </ul>
+          </ReviewsList>
         </div>
       ) : (
-        <p>Not found</p>
+        <p>No reviews found for this movie</p>
       )}
     </>
   );

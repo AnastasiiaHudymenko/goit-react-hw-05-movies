@@ -16,16 +16,6 @@ class MovieServices {
     }
   };
 
-  _transformTrendingMovies = movies => {
-    return movies.map(({ id, title, poster_path }) => {
-      return {
-        id,
-        title,
-        images: `${this.BASE_URL_IMG}${poster_path}`,
-      };
-    });
-  };
-
   getMovieDetalis = async id => {
     try {
       const res = await axios.get(
@@ -62,6 +52,7 @@ class MovieServices {
       const res = await axios.get(
         `${this.BASE_URL}search/movie?api_key=${this.API_KEY}&language=en-US&include_adult=false&query=${query}`
       );
+      console.log(res.data.results);
       return this._transformMovie(res.data.results);
     } catch (error) {
       console.log(error);
@@ -69,8 +60,19 @@ class MovieServices {
   };
 
   _transformMovie = movies => {
-    return movies.map(({ id, title }) => {
-      return { id, title };
+    return movies.map(({ id, title, poster_path }) => {
+      if (!poster_path) {
+        return {
+          title,
+          image: null,
+          id,
+        };
+      }
+      return {
+        id,
+        title,
+        image: `${this.BASE_URL_IMG}${poster_path}`,
+      };
     });
   };
 
@@ -121,6 +123,16 @@ class MovieServices {
   _transformReviewsMovie = reviews => {
     return reviews.map(({ author, id, content }) => {
       return { author, id, content };
+    });
+  };
+
+  _transformTrendingMovies = movies => {
+    return movies.map(({ id, title, poster_path }) => {
+      return {
+        id,
+        title,
+        images: `${this.BASE_URL_IMG}${poster_path}`,
+      };
     });
   };
 }
