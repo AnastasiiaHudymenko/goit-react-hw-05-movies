@@ -1,30 +1,13 @@
 import { Formik, Form, Field } from 'formik';
-import { useSearchParams, useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import MovieServices from '../services/MovieServices';
+import { useSearchParams } from 'react-router-dom';
+
 import { MovieList } from '../components/MovieList/MovieList';
 
 export const Movies = () => {
-  const [query, setQuery] = useState(null);
-  const [movies, setMovies] = useState(() => {
-    return JSON.parse(sessionStorage.getItem('search')) ?? [];
-  });
-  const movieServices = new MovieServices();
   const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
-  console.log(query, searchParams);
-
-  const onRequest = async query => {
-    if (query === '') return;
-    const res = await movieServices.getMovieSearch(query);
-    setMovies(res);
-    sessionStorage.setItem('search', JSON.stringify(res));
-  };
+  const search = searchParams.get('search');
 
   const handlSubmit = ({ search }, action) => {
-    setQuery(search);
-    onRequest(search);
-
     const nextParams = search !== '' ? { search } : {};
     setSearchParams(nextParams);
 
@@ -41,11 +24,7 @@ export const Movies = () => {
           <button type="submit">Search</button>
         </Form>
       </Formik>
-      {location.search !== '' ? (
-        <MovieList movies={movies} />
-      ) : (
-        <MovieList movies={[]} />
-      )}
+      <MovieList query={search} />
     </main>
   );
 };

@@ -9,7 +9,7 @@ export const MoviesDetalis = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const movieServices = new MovieServices();
-  // const backHref = location.state?.from ?? '/movies';
+
   useEffect(() => {
     onRequest(movieId);
     // eslint-disable-next-line
@@ -56,22 +56,12 @@ export const MoviesDetalis = () => {
           </ul>
           <ul>
             <li>
-              <Link
-                to="cast"
-                state={{
-                  from: `${location.state.from.pathname}${location.state.from.search}`,
-                }}
-              >
+              <Link to="cast" state={location.state}>
                 Read about our cast
               </Link>
             </li>
             <li>
-              <Link
-                to="reviews"
-                state={{
-                  from: `${location.state.from.pathname}${location.state.from.search}`,
-                }}
-              >
+              <Link to="reviews" state={location.state}>
                 Get to know the reviews
               </Link>
             </li>
