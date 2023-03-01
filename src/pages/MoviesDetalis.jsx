@@ -21,7 +21,7 @@ const MoviesDetalis = () => {
   const movieServices = new MovieServices();
   console.log({ from: location });
   console.log(location);
-  const backLinkHref = location.state?.from ?? '/movies';
+  const backLinkHref = location.state?.from ?? '/';
 
   useEffect(() => {
     onRequest(movieId);
