@@ -23,8 +23,6 @@ const MoviesDetalis = () => {
   // console.log({ from: location });
   console.log(location);
   const backLinkHref = location.state?.from ?? '/';
-  // const currentLocation = location.state.from;
-  // console.log(currentLocation);
 
   useEffect(() => {
     onRequest(movieId);
@@ -67,7 +65,9 @@ const MoviesDetalis = () => {
               <StyledLink to="cast">Read about our cast</StyledLink>
             </Item>
             <Item>
-              <StyledLink to="reviews">Get to know the reviews</StyledLink>
+              <StyledLink to="reviews" state={location.state}>
+                Get to know the reviews
+              </StyledLink>
             </Item>
           </ListCastReviews>
         </Container>
