@@ -20,9 +20,11 @@ const MoviesDetalis = () => {
   const location = useLocation();
   const movieServices = new MovieServices();
 
-  console.log({ from: location });
+  // console.log({ from: location });
   console.log(location);
-  // const backLinkHref = location.state?.from ?? '/';
+  const backLinkHref = location.state?.from ?? '/';
+  const currentLocation = location.state.from;
+  console.log(currentLocation);
 
   useEffect(() => {
     onRequest(movieId);
@@ -56,22 +58,16 @@ const MoviesDetalis = () => {
         </Content>
       </WrapperContent>
       <BtnGoBack>
-        <Link to={location.state.from} state={location.state}>
-          Go back{' '}
-        </Link>
+        <Link to={backLinkHref}>Go back </Link>
       </BtnGoBack>
       <DivMain>
         <Container>
           <ListCastReviews>
             <Item>
-              <StyledLink to="cast" state={location.state}>
-                Read about our cast
-              </StyledLink>
+              <StyledLink to="cast">Read about our cast</StyledLink>
             </Item>
             <Item>
-              <StyledLink to="reviews" state={location.state}>
-                Get to know the reviews
-              </StyledLink>
+              <StyledLink to="reviews">Get to know the reviews</StyledLink>
             </Item>
           </ListCastReviews>
         </Container>
