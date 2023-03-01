@@ -20,7 +20,7 @@ const MoviesDetalis = () => {
   const location = useLocation();
   const movieServices = new MovieServices();
 
-  // console.log({ from: location });
+  console.log({ from: location });
   console.log(location);
   const backLinkHref = location.state?.from ?? '/';
 
