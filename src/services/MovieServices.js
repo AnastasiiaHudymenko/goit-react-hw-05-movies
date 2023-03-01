@@ -87,7 +87,7 @@ class MovieServices {
     poster_path,
     overview,
     genres,
-    popularity,
+    vote_average,
   }) => {
     if (!poster_path) {
       return {
@@ -95,7 +95,7 @@ class MovieServices {
         image: null,
         overview,
         genres,
-        userScore: popularity,
+        userScore: vote_average,
       };
     }
     return {
@@ -103,7 +103,7 @@ class MovieServices {
       image: `${this.BASE_URL_IMG}${poster_path}`,
       overview,
       genres,
-      userScore: popularity,
+      userScore: vote_average,
     };
   };
 

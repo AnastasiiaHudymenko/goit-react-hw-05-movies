@@ -5,7 +5,8 @@ import { MovieTitle, ImgMovie, Item } from './TrendingList.styled';
 
 const TrendingListMovie = ({ movies }) => {
   const location = useLocation();
-
+  console.log(location);
+  console.log({ from: location });
   return (
     <MoviesList>
       {movies.map(({ title, id, images }) => (

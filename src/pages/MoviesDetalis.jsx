@@ -19,10 +19,11 @@ const MoviesDetalis = () => {
   const [movieDetalis, setMovieDetalis] = useState([]);
   const location = useLocation();
   const movieServices = new MovieServices();
+
   console.log({ from: location });
   console.log(location);
-  const backLinkHref = location.state?.from ?? '/';
-  console.log(backLinkHref);
+  // const backLinkHref = location.state?.from ?? '/';
+
   useEffect(() => {
     onRequest(movieId);
     // eslint-disable-next-line
@@ -45,7 +46,7 @@ const MoviesDetalis = () => {
         {image && <img width={250} src={image} alt={title} />}
         <Content>
           <h1>{title}</h1>
-          <p>User score: {roundNumber(userScore)}%</p>
+          <p>User score: {(userScore * 10).toFixed(0)}%</p>
           <h2>Overview</h2>
           <p>{overview}</p>
           <h2>Genres: </h2>
@@ -55,7 +56,9 @@ const MoviesDetalis = () => {
         </Content>
       </WrapperContent>
       <BtnGoBack>
-        <Link to={location.state.from}>Go back </Link>
+        <Link to={location.state.from} state={location.state}>
+          Go back{' '}
+        </Link>
       </BtnGoBack>
       <DivMain>
         <Container>
@@ -89,14 +92,5 @@ const MoviesDetalis = () => {
     </main>
   );
 };
-
-function roundNumber(num) {
-  if (!num) {
-    return;
-  }
-  let numString = num.toString();
-  let truncatedNum = numString.slice(0, 2);
-  return truncatedNum;
-}
 
 export default MoviesDetalis;
