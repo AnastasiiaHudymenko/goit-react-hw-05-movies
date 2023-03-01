@@ -21,6 +21,7 @@ const MoviesDetalis = () => {
   const movieServices = new MovieServices();
   console.log({ from: location });
   console.log(location);
+  const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     onRequest(movieId);
@@ -54,7 +55,7 @@ const MoviesDetalis = () => {
         </Content>
       </WrapperContent>
       <BtnGoBack>
-        <Link to={location.state.from} state={{ from: location }}>
+        <Link to={backLinkHref} state={{ from: location }}>
           Go back{' '}
         </Link>
       </BtnGoBack>
