@@ -10,9 +10,11 @@ class MovieServices {
       const res = await axios.get(
         `${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}`
       );
+
       return this._transformTrendingMovies(res.data.results);
     } catch (error) {
       console.log(error);
+      return [];
     }
   };
 
@@ -21,9 +23,11 @@ class MovieServices {
       const res = await axios.get(
         `${this.BASE_URL}movie/${id}?api_key=${this.API_KEY}&language=en-US`
       );
+
       return this._transformMovieDetalis(res.data);
     } catch (error) {
       console.log(error);
+      return error;
     }
   };
 
@@ -44,6 +48,7 @@ class MovieServices {
       }
     } catch (error) {
       console.log(error);
+      return error;
     }
   };
 
@@ -52,10 +57,11 @@ class MovieServices {
       const res = await axios.get(
         `${this.BASE_URL}search/movie?api_key=${this.API_KEY}&language=en-US&include_adult=false&query=${query}`
       );
-      console.log(res.data.results);
+
       return this._transformMovie(res.data.results);
     } catch (error) {
       console.log(error);
+      return error;
     }
   };
 

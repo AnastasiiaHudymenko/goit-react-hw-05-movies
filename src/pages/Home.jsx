@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+
 import MovieServices from '../services/MovieServices';
 import TrendingListMovie from '../components/TrendingListMovie/TrendingListMovie';
+import { Container } from '../components/TrendingListMovie/TrendingList.styled';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -14,6 +16,7 @@ const Home = () => {
   const onRequest = async () => {
     try {
       const res = await movieServices.getTrendingMovies();
+
       setTrendingMovies(res);
     } catch (error) {
       console.log(error);
@@ -22,8 +25,10 @@ const Home = () => {
 
   return (
     <main>
-      <h1 style={{ marginBottom: '20px' }}>Trending today</h1>
-      <TrendingListMovie movies={trendingMovies} />
+      <Container>
+        <h1 style={{ marginBottom: '20px' }}>Trending today</h1>
+        <TrendingListMovie movies={trendingMovies} />
+      </Container>
     </main>
   );
 };

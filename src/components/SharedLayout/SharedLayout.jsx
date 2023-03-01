@@ -11,21 +11,23 @@ import {
 
 export const SharedLayout = () => {
   return (
-    <Container>
+    <>
       <Header>
-        <nav>
-          <List>
-            <NavItem>
-              <StyledLink to="/" end>
-                Home
-              </StyledLink>
-            </NavItem>
-            <NavItem>
-              {' '}
-              <StyledLink to="/movies">Movies</StyledLink>
-            </NavItem>
-          </List>
-        </nav>
+        <Container>
+          <nav>
+            <List>
+              <NavItem>
+                <StyledLink to="/" end>
+                  Home
+                </StyledLink>
+              </NavItem>
+              <NavItem>
+                {' '}
+                <StyledLink to="/movies">Movies</StyledLink>
+              </NavItem>
+            </List>
+          </nav>
+        </Container>
       </Header>
       <Suspense
         fallback={
@@ -39,6 +41,6 @@ export const SharedLayout = () => {
       >
         <Outlet />
       </Suspense>
-    </Container>
+    </>
   );
 };

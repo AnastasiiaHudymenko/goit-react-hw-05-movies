@@ -34,4 +34,6 @@ export const NavItem = styled.li`
 export const Header = styled.header`
   padding: 20px 0;
   margin-bottom: 20px;
+
+  box-shadow: 11px 9px 17px -9px rgba(0, 0, 0, 0.75);
 `;

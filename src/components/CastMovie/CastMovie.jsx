@@ -8,7 +8,7 @@ import {
   ImgCast,
 } from './CastMovie.styled';
 import notFound from '../../not-found.jpg';
-console.log(notFound);
+
 const CastMovie = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);

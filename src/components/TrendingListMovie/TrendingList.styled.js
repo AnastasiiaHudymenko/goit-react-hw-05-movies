@@ -19,3 +19,11 @@ export const ImgMovie = styled.img`
 export const Item = styled.li`
   width: 300px;
 `;
+export const Container = styled.div`
+   max-width: 1280px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: o auto;
+    margin: 0 auto;
+}
+`;

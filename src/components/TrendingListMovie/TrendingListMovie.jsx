@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { MoviesList } from './TrendingList.styled';
 import { MovieTitle, ImgMovie, Item } from './TrendingList.styled';
 
@@ -17,6 +18,16 @@ const TrendingListMovie = ({ movies }) => {
       ))}
     </MoviesList>
   );
+};
+
+TrendingListMovie.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      id: PropTypes.number.isRequired,
+      images: PropTypes.string,
+    })
+  ),
 };
 
 export default TrendingListMovie;
