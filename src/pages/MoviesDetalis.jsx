@@ -19,6 +19,8 @@ const MoviesDetalis = () => {
   const [movieDetalis, setMovieDetalis] = useState([]);
   const location = useLocation();
   const movieServices = new MovieServices();
+  console.log({ from: location });
+  console.log(location.state.from);
 
   useEffect(() => {
     onRequest(movieId);
