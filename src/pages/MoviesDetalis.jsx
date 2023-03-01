@@ -19,9 +19,6 @@ const MoviesDetalis = () => {
   const [movieDetalis, setMovieDetalis] = useState([]);
   const location = useLocation();
   const movieServices = new MovieServices();
-
-  console.log({ from: location });
-  console.log(location);
   const backLinkHref = location.state?.from ?? '/';
 
   useEffect(() => {
@@ -63,12 +60,12 @@ const MoviesDetalis = () => {
           <ListCastReviews>
             <Item>
               <StyledLink to="cast" state={location.state}>
-                Read about our cast
+                See the cast
               </StyledLink>
             </Item>
             <Item>
               <StyledLink to="reviews" state={location.state}>
-                Get to know the reviews
+                Read reviews
               </StyledLink>
             </Item>
           </ListCastReviews>

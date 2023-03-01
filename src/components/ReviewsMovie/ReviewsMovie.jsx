@@ -39,7 +39,7 @@ const ReviewsMovie = () => {
                   <AuthorTitle>Author: {author}</AuthorTitle>
                   <p>
                     {' '}
-                    <b>Content:</b> {content}
+                    <b>Content:</b> {transformContent(content)}
                   </p>
                 </ReviewsItem>
               );
@@ -52,5 +52,13 @@ const ReviewsMovie = () => {
     </>
   );
 };
+
+function transformContent(str) {
+  if (str.length > 270) {
+    let newStr = str.slice(0, 270);
+    return `${newStr}...`;
+  }
+  return str;
+}
 
 export default ReviewsMovie;

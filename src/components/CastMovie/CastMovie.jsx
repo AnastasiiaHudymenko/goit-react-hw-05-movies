@@ -7,7 +7,8 @@ import {
   WrapperContent,
   ImgCast,
 } from './CastMovie.styled';
-import notFound from '../../not-found.jpg';
+
+import noImg from '../../img/no_image.jpg';
 
 const CastMovie = () => {
   const { movieId } = useParams();
@@ -36,14 +37,9 @@ const CastMovie = () => {
           return (
             <CastItem key={id}>
               {image ? (
-                <ImgCast width={150} src={image} alt="" />
+                <ImgCast width={150} src={image} alt={name} />
               ) : (
-                <ImgCast
-                  style={{ objectFit: 'cover', height: '221px' }}
-                  width={150}
-                  src={notFound}
-                  alt=""
-                />
+                <ImgCast width={150} src={noImg} alt="not found img" />
               )}
               <WrapperContent>
                 <p>{name}</p>
