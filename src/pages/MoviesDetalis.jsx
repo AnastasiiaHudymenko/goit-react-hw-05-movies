@@ -23,8 +23,8 @@ const MoviesDetalis = () => {
   // console.log({ from: location });
   console.log(location);
   const backLinkHref = location.state?.from ?? '/';
-  const currentLocation = location.state.from;
-  console.log(currentLocation);
+  // const currentLocation = location.state.from;
+  // console.log(currentLocation);
 
   useEffect(() => {
     onRequest(movieId);
