@@ -62,7 +62,9 @@ const MoviesDetalis = () => {
         <Container>
           <ListCastReviews>
             <Item>
-              <StyledLink to="cast">Read about our cast</StyledLink>
+              <StyledLink to="cast" state={location.state}>
+                Read about our cast
+              </StyledLink>
             </Item>
             <Item>
               <StyledLink to="reviews" state={location.state}>
