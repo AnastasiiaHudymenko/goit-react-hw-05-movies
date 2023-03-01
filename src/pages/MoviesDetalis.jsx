@@ -20,7 +20,7 @@ const MoviesDetalis = () => {
   const location = useLocation();
   const movieServices = new MovieServices();
   console.log({ from: location });
-  console.log(location.state.from);
+  console.log(location);
 
   useEffect(() => {
     onRequest(movieId);
