@@ -55,7 +55,7 @@ const MoviesDetalis = () => {
         </Content>
       </WrapperContent>
       <BtnGoBack>
-        <Link to={backLinkHref}>Go back </Link>
+        <Link to={location.state.from}>Go back </Link>
       </BtnGoBack>
       <DivMain>
         <Container>
