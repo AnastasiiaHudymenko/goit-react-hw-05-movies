@@ -22,7 +22,7 @@ const MoviesDetalis = () => {
   console.log({ from: location });
   console.log(location);
   const backLinkHref = location.state?.from ?? location.from;
-
+  console.log(backLinkHref);
   useEffect(() => {
     onRequest(movieId);
     // eslint-disable-next-line
@@ -55,9 +55,7 @@ const MoviesDetalis = () => {
         </Content>
       </WrapperContent>
       <BtnGoBack>
-        <Link to={backLinkHref} state={{ from: location }}>
-          Go back{' '}
-        </Link>
+        <Link to={backLinkHref}>Go back </Link>
       </BtnGoBack>
       <DivMain>
         <Container>
